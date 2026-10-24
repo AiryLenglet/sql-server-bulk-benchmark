@@ -1,0 +1,53 @@
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by net.rubygrapefruit.platform.internal.NativeLibraryLoader in an unnamed module (file:/Users/airy/.gradle/wrapper/dists/gradle-9.2.0-bin/11i5gvueggl8a5cioxuftxrik/gradle-9.2.0/lib/native-platform-0.22-milestone-29.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+
+Welcome to Gradle 9.2.0!
+
+Here are the highlights of this release:
+ - Windows ARM support
+ - Improved publishing APIs
+ - Better guidance for dependency verification failures
+
+For more details see https://docs.gradle.org/9.2.0/release-notes.html
+
+> Task :compileJava
+> Task :processResources NO-SOURCE
+> Task :classes
+
+> Task :run
+oct. 24, 2026 3:07:15 PM com.microsoft.sqlserver.jdbc.SQLServerConnection prelogin
+WARNING: ConnectionID:1 ClientConnectionId: 3f75a854-fbb6-4a6a-850a-1734046c0214 Prelogin error: host localhost port 14330 Unexpected end of prelogin response after 0 bytes read
+Waiting for SQL Server at jdbc:sqlserver://localhost:14330;encrypt=false (Échec de la connexion TCP/IP à l'hôte localhost, port 14330. Erreur : « Le pilote a reçu une réponse de préconnexion inattendue. Examinez les propriétés de connexion et vérifiez qu'une instance de SQL Server est en cours d'exécution sur l'hôte et accepte les connexions TCP/IP au port. Ce pilote peut être utilisé uniquement avec SQL Server 2005 ou ultérieur. ». ClientConnectionId:3f75a854-fbb6-4a6a-850a-1734046c0214)
+oct. 24, 2026 3:07:18 PM com.microsoft.sqlserver.jdbc.SQLServerConnection prelogin
+Waiting for SQL Server at jdbc:sqlserver://localhost:14330;encrypt=false (Échec de la connexion TCP/IP à l'hôte localhost, port 14330. Erreur : « Le pilote a reçu une réponse de préconnexion inattendue. Examinez les propriétés de connexion et vérifiez qu'une instance de SQL Server est en cours d'exécution sur l'hôte et accepte les connexions TCP/IP au port. Ce pilote peut être utilisé uniquement avec SQL Server 2005 ou ultérieur. ». ClientConnectionId:3e34e3a8-3c7a-479c-b0c7-35db576e24e2)
+WARNING: ConnectionID:2 ClientConnectionId: 3e34e3a8-3c7a-479c-b0c7-35db576e24e2 Prelogin error: host localhost port 14330 Unexpected end of prelogin response after 0 bytes read
+Generating 1,000,000 rows in dbo.transactions (one-time)...
+Generated in 3 s
+Java        : 25 (OpenJDK 64-Bit Server VM), 12 CPUs, max heap 2,048 MB
+SQL Server  : Microsoft SQL Server 2022 (RTM-CU27-GDR) (KB5126934) - 16.0.4305.5 (X64)
+JDBC driver : 13.6.0.0
+Run         : 1,000,000 rows into #stg_trx, batch size 50,000, 1 iteration(s), bulkcopy, batch, server-side
+
+warm-up  bulkcopy         200,000 rows     0.6 s   336,209 rows/s | read  34% | executeBatch    - | 2,985 B/row | GC      5 ms | bulk-loaded     200,000 | OK
+warm-up  batch            200,000 rows     0.7 s   275,290 rows/s | read  23% | executeBatch  58% | 5,412 B/row | GC     39 ms | bulk-loaded     200,000 | OK
+warm-up  server-side      200,000 rows     0.2 s 1,033,258 rows/s | read    - | executeBatch    - |     0 B/row | GC      0 ms | bulk-loaded           0 | OK
+1/1      bulkcopy       1,000,000 rows     1.9 s   525,730 rows/s | read  34% | executeBatch    - | 2,824 B/row | GC     34 ms | bulk-loaded   1,000,000 | OK
+1/1      batch          1,000,000 rows     2.8 s   359,447 rows/s | read  19% | executeBatch  67% | 5,400 B/row | GC     84 ms | bulk-loaded   1,000,000 | OK
+1/1      server-side    1,000,000 rows     0.4 s 2,356,118 rows/s | read    - | executeBatch    - |     0 B/row | GC      0 ms | bulk-loaded           0 | OK
+
+Summary: medians over the measured runs
+strategy      seconds     rows/s  vs best   read  executeBatch   B/row    bulk-loaded  runs ok
+bulkcopy          1.9    525,730    4.48x    34%             -   2,824      1,000,000      1/1
+batch             2.8    359,447    6.55x    19%           67%   5,400      1,000,000      1/1
+server-side       0.4  2,356,118    1.00x      -             -       0              0      1/1
+
+batch takes 1.46x as long as bulkcopy.
+Content check: all successful runs produced identical #stg_trx content.
+Per-run figures: /Users/airy/workspace/sql-server-bulk-benchmark/results/results-20261024-150725.csv
+
+BUILD SUCCESSFUL in 31s
+2 actionable tasks: 2 executed
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.2.0/userguide/configuration_cache_enabling.html

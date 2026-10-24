@@ -1,0 +1,43 @@
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by net.rubygrapefruit.platform.internal.NativeLibraryLoader in an unnamed module (file:/Users/airy/.gradle/wrapper/dists/gradle-9.2.0-bin/11i5gvueggl8a5cioxuftxrik/gradle-9.2.0/lib/native-platform-0.22-milestone-29.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+> Task :compileJava UP-TO-DATE
+> Task :processResources NO-SOURCE
+> Task :classes UP-TO-DATE
+
+> Task :run
+Generating 10,000,000 rows in dbo.transactions (one-time)...
+Generated in 24 s
+Java        : 25 (OpenJDK 64-Bit Server VM), 12 CPUs, max heap 2,048 MB
+SQL Server  : Microsoft SQL Server 2022 (RTM-CU27-GDR) (KB5126934) - 16.0.4305.5 (X64)
+JDBC driver : 13.6.0.0
+Run         : 10,000,000 rows into #stg_trx, batch size 50,000, 3 iteration(s), bulkcopy, batch, server-side
+
+warm-up  bulkcopy         200,000 rows     0.5 s   399,819 rows/s | read  36% | executeBatch    - | 2,909 B/row | GC      6 ms | bulk-loaded     200,000 | OK
+warm-up  batch            200,000 rows     0.6 s   312,417 rows/s | read  19% | executeBatch  64% | 5,411 B/row | GC     18 ms | bulk-loaded     200,000 | OK
+warm-up  server-side      200,000 rows     0.2 s   884,006 rows/s | read    - | executeBatch    - |     0 B/row | GC      0 ms | bulk-loaded           0 | OK
+1/3      bulkcopy      10,000,000 rows    17.9 s   560,057 rows/s | read  33% | executeBatch    - | 2,889 B/row | GC     33 ms | bulk-loaded  10,000,000 | OK
+1/3      batch         10,000,000 rows    26.5 s   377,191 rows/s | read  19% | executeBatch  68% | 5,480 B/row | GC    481 ms | bulk-loaded  10,000,000 | OK
+1/3      server-side   10,000,000 rows     1.9 s 5,385,240 rows/s | read    - | executeBatch    - |     0 B/row | GC      0 ms | bulk-loaded           0 | OK
+2/3      batch         10,000,000 rows    26.9 s   372,416 rows/s | read  20% | executeBatch  67% | 5,480 B/row | GC    756 ms | bulk-loaded  10,000,000 | OK
+2/3      server-side   10,000,000 rows     1.8 s 5,475,357 rows/s | read    - | executeBatch    - |     0 B/row | GC      0 ms | bulk-loaded           0 | OK
+2/3      bulkcopy      10,000,000 rows    18.1 s   553,663 rows/s | read  32% | executeBatch    - | 2,904 B/row | GC     86 ms | bulk-loaded  10,000,000 | OK
+3/3      server-side   10,000,000 rows     1.9 s 5,400,359 rows/s | read    - | executeBatch    - |     0 B/row | GC      0 ms | bulk-loaded           0 | OK
+3/3      bulkcopy      10,000,000 rows    17.5 s   571,406 rows/s | read  33% | executeBatch    - | 2,904 B/row | GC     21 ms | bulk-loaded  10,000,000 | OK
+3/3      batch         10,000,000 rows    26.0 s   384,577 rows/s | read  20% | executeBatch  68% | 5,480 B/row | GC    487 ms | bulk-loaded  10,000,000 | OK
+
+Summary: medians over the measured runs
+strategy      seconds     rows/s  vs best   read  executeBatch   B/row    bulk-loaded  runs ok
+bulkcopy         17.9    560,057    9.64x    33%             -   2,904     10,000,000      3/3
+batch            26.5    377,191   14.32x    20%           68%   5,480     10,000,000      3/3
+server-side       1.9  5,400,359    1.00x      -             -       0              0      3/3
+
+batch takes 1.48x as long as bulkcopy.
+Content check: all successful runs produced identical #stg_trx content.
+Per-run figures: /Users/airy/workspace/sql-server-bulk-benchmark/results/results-20261024-150811.csv
+
+BUILD SUCCESSFUL in 3m 54s
+2 actionable tasks: 1 executed, 1 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.2.0/userguide/configuration_cache_enabling.html

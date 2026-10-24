@@ -1,0 +1,4 @@
+strategy,iteration,rows,seconds,rows_per_s,read_share,execute_batch_share,alloc_bytes_per_row,gc_ms,server_bulk_loaded_rows,checksum,ok,problem
+bulkcopy,1,1000000,1.9021,525729.6239,0.3436,,2823.7214,34,1000000,-586905149,true,
+batch,1,1000000,2.7821,359446.5996,0.1909,0.6737,5400.2945,84,1000000,-586905149,true,
+server-side,1,1000000,0.4244,2356118.0108,,,0.0198,0,0,-586905149,true,

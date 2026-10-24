@@ -1,0 +1,13 @@
+# Local SQL Server for the benchmark only.
+# On Apple Silicon the amd64 image runs through Docker Desktop's Rosetta emulation.
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    platform: linux/amd64
+    container_name: sql-server-bulk-benchmark
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Developer"
+      MSSQL_SA_PASSWORD: "Bench_Passw0rd!"
+    ports:
+      - "14330:1433"
